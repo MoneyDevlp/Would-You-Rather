@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 class PollItemComponent extends React.Component {
     render() {
 
-        const {username, userID, avata, option, qid} = this.props;
+        const { username, avata, option, question_id } = this.props;
 
         return (
             <div className="poll-item">
@@ -19,9 +19,9 @@ class PollItemComponent extends React.Component {
                         <Card.Img className="poll-item--avt" variant="top" src={avata} />
                     </div>
                     <div className="poll-item--question">
-                        <h5 style={{fontSize: "15px"}}>Would you rather</h5>
-                        <p>...{option}...</p>
-                        <Button className="poll-item--btn" as={Link} to={`poll/${qid}${userID}`}>View Poll</Button>
+                        <h5 style={{ fontSize: "15px" }}>Would you rather</h5>
+                        <p style={{wordWrap: "break-word"}}>...{option}...</p>
+                        <Button className="poll-item--btn" as={Link} to={`questions/${question_id}`}>View Poll</Button>
                     </div>
                 </div>
             </div>
@@ -29,17 +29,15 @@ class PollItemComponent extends React.Component {
     }
 }
 
-function mapStateToProps({users, questions}, {qid}) {
+function mapStateToProps({ users, questions }, { question_id }) {
 
     // Get info user and option of question
-    const username = users[questions[qid].author].name;
-    const userID = users[questions[qid].author].id;
-    const avata = users[questions[qid].author].avatarURL;
-    const option = questions[qid].optionOne.text;
-    
+    const username = users[questions[question_id].author].name;
+    const avata = users[questions[question_id].author].avatarURL;
+    const option = questions[question_id].optionOne.text;
+
     return {
         username,
-        userID,
         avata,
         option
     }

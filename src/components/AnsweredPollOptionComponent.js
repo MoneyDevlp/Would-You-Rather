@@ -9,6 +9,7 @@ const AnsweredPollOptionComponent = (props) => {
 
     return (
         <div className={voted === option ? "pollAnsResult voted" : "pollAnsResult no-vote"}>
+            {voted === option && <p className="yourVote">Your vote</p>}
             <h5 className="pollAnsResult-question">Would you rather {optionVal} ?</h5>
             <p className="percentVote"
                 style={{ width: `${Math.round((numVote / voteTotal) * 100)}%`, backgroundColor: "darksalmon", color: "white", height: "28px" }}>

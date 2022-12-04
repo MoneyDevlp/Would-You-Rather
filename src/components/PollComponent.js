@@ -3,39 +3,40 @@ import { connect } from "react-redux";
 import NoAnsweredPollComponent from "./NoAnsweredPollComponent"
 import AnsweredPollComponent from "./AnsweredPollComponent"
 import { useParams } from "react-router";
+import Page404Component from '../components/Page404Component'
 
 const PollComponent = (props) => {
-    
 
-        const {answeredPoll} = props;
 
-        const qid = useParams();
-        const userID = useParams();
-        const voteOrNotVote = answeredPoll.includes(qid.qid.substring(0,qid.qid.length -4));
+    const { answeredPoll,questions } = props;
 
-        // console.log("poll", voteOrNotVote)
-        // console.log("que", qid.qid.substring(0,qid.qid.length -4))
-        // console.log("us", (qid.qid.substring(qid.qid.length -4,qid.qid.length)).concat(userID.userID))
+    const question_id = useParams();
+    const voteOrNotVote = answeredPoll.includes(question_id.question_id);
 
-        return (
-            <div>
-                {voteOrNotVote ? <AnsweredPollComponent qid={qid.qid.substring(0,qid.qid.length -4)} 
-                userid={(qid.qid.substring(qid.qid.length -4,qid.qid.length)).concat(userID.userID)}/> : 
-                <NoAnsweredPollComponent qid={qid.qid.substring(0,qid.qid.length -4)} 
-                userid={(qid.qid.substring(qid.qid.length -4,qid.qid.length)).concat(userID.userID)}/>}
-            </div>
-        )
-    
+    if(!questions[question_id.question_id]) {
+        return <Page404Component />
+    }
+
+    return (
+        <div>
+            {voteOrNotVote ? <AnsweredPollComponent qid={question_id.question_id}
+            /> :
+                <NoAnsweredPollComponent qid={question_id.question_id}
+                />}
+        </div>
+    )
+
 }
 
-function mapStateToProps({users, authed}) {
+function mapStateToProps({ users, questions, authed }) {
 
     // Get id question and check question vote or not vote
     //const qid = props.match;
     const answeredPoll = Object.keys(users[authed].answers);
 
     return {
-        answeredPoll
+        answeredPoll,
+        questions
     }
 }
 

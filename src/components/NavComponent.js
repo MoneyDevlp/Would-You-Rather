@@ -26,7 +26,7 @@ const NavComponent = (props) => {
                     <Container>
                         <Nav className="navbar">
                             <Nav.Link className="nav-link" as={NavLink} to="/">Home</Nav.Link>
-                            <Nav.Link className="nav-link" as={NavLink} to="/addpoll">New Question</Nav.Link>
+                            <Nav.Link className="nav-link" as={NavLink} to="/add">New Question</Nav.Link>
                             <Nav.Link className="nav-link" as={NavLink} to="/leaderboard">Leader Board</Nav.Link>
                         </Nav>
                     </Container>

@@ -26,11 +26,12 @@ const AnsweredPollComponent = (props) => {
     )
 }
 
-function mapStateToProps({ users }, { qid, userid }) {
+function mapStateToProps({ users, questions }, { qid }) {
 
     // Get info user
-    const username = users[userid].name;
-    const avataUrl = users[userid].avatarURL;
+    const userID = questions[qid].author;
+    const username = users[userID].name;
+    const avataUrl = users[userID].avatarURL;
 
     return {
         username,

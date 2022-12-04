@@ -28,9 +28,9 @@ class App extends React.Component {
         ): (
           <Routes>
             <Route exact path="/" element={<ListPollComponent />} />
-            <Route exact path="/addpoll" element={<NewPollComponent />} />
+            <Route exact path="/add" element={<NewPollComponent />} />
             <Route exact path="/leaderboard" element={<LeaderBoardComponent />} />
-            <Route exact path="/poll/:qid:userID" element={<PollComponent />} />
+            <Route exact path="/questions/:question_id" element={<PollComponent />} />
           </Routes>
         )} 
         

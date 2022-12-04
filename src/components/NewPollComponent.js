@@ -1,36 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from 'react-bootstrap/Form';
 import { connect } from "react-redux";
 import { addNewPoll } from "../actions/util";
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from "react-router-dom";
 
-class NewPollComponent extends React.Component {
+const NewPollComponent = (props) => {
 
-    state = {
-        optionOne: "",
-        optionTwo: ""
+    const [optionOne, setOptionOne] = useState("")
+    const [optionTwo, setOptionTwo] = useState("")
+    const navigate = useNavigate();
+
+    const changeValueOptionOne = (ev) => {
+        const value = ev.target.value;
+
+        setOptionOne(value)
     }
 
-    changeValueOption = (ev) => {
-        const optionVal = ev.target;
-        const name = optionVal.name;
-        const value = optionVal.value;
+    const changeValueOptionTwo = (ev) => {
+        const value = ev.target.value;
 
-        // console.log("name",name)
-        // console.log("val",value)
-
-        this.setState((prevState) => ({
-            ...prevState,
-            [name]: value
-        }))
+        setOptionTwo(value)
     }
 
-    createQuestion = (ev) => {
+    const createQuestion = (ev) => {
         ev.preventDefault();
-        const { dispatch, authed  } = this.props;
-        const { optionOne, optionTwo } = this.state;
+        const { dispatch, authed } = props;
 
-        if(optionOne.length >= 100 || optionTwo.length >= 100) {
+        if (optionOne.length >= 100 || optionTwo.length >= 100) {
             alert("Please enter less than 100 characters!")
         }
         else {
@@ -39,43 +36,37 @@ class NewPollComponent extends React.Component {
                 optionTwoText: optionTwo,
                 author: authed
             }))
-            alert("Add new poll successfull! Back to home page to see new poll")
-            document.getElementById("otpOne").value = " "
-            document.getElementById("otpTwo").value = " "   
+            navigate("/")
         }
     }
 
-    render() {
-
-        const { optionOne, optionTwo } = this.state;
-
-        return (
-            <div className="newPoll">
-                <div className="newPoll-header">
-                    <h4 className="newPoll-header--text">Create New Question</h4>
-                </div>
-                <div className="newPoll-body">
-                    <p>Complete the question:</p>
-                    <h5>Would you rather...</h5>
-                    <div className="newPoll-body--form">
-                    <Form onSubmit={this.createQuestion}>
-                        <input type="text" name="optionOne" id="otpOne" className="newPoll-input" onChange={this.changeValueOption} 
-                        maxLength={100} placeholder="Enter option one text here" />
+    return (
+        <div className="newPoll">
+            <div className="newPoll-header">
+                <h4 className="newPoll-header--text">Create New Question</h4>
+            </div>
+            <div className="newPoll-body">
+                <p>Complete the question:</p>
+                <h5>Would you rather...</h5>
+                <div className="newPoll-body--form">
+                    <Form onSubmit={createQuestion}>
+                        <input type="text" name="optionOne" id="otpOne" className="newPoll-input" onChange={changeValueOptionOne}
+                            maxLength={100} placeholder="Enter option one text here" />
                         <p>OR</p>
-                        <input type="text" name="optionTwo" id="otpTwo" className="newPoll-input" onChange={this.changeValueOption}  
-                        maxLength={100} placeholder="Enter option two text here" />
+                        <input type="text" name="optionTwo" id="otpTwo" className="newPoll-input" onChange={changeValueOptionTwo}
+                            maxLength={100} placeholder="Enter option two text here" />
                         <Button className="newPoll-button" type="submit"
-                        disabled={optionOne === "" || optionTwo === ""}>Submit</Button>
+                            disabled={optionOne === "" || optionTwo === ""}>Submit</Button>
                     </Form>
-                    </div>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
+
 }
 
-function mapStateToProps({authed}) {
-    return {authed}
+function mapStateToProps({ authed }) {
+    return { authed }
 }
 
 export default connect(mapStateToProps)(NewPollComponent);

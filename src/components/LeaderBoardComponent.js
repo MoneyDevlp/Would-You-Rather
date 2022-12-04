@@ -45,7 +45,7 @@ function mapStateToProps({ users }) {
     return {
         usersID: Object.keys(users).sort((before, after) =>
             Object.keys(users[after].answers).length + users[after].questions.length -
-            Object.keys(users[before].answers).length + users[before].questions.length
+            (Object.keys(users[before].answers).length + users[before].questions.length)
         ),
         users
     }

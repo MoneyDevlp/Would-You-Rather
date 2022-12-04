@@ -15,11 +15,11 @@ const ListPollComponent = (props) => {
     useEffect(() => {
         const btnUnanswered = document.getElementById("btn-un");
         const btnAnswered = document.getElementById("btn-an");
-        if(listPoll === "unanswered") {
+        if (listPoll === "unanswered") {
             btnUnanswered.classList.add("poll-tab--active");
             btnAnswered.classList.remove("poll-tab--active")
         }
-        if(listPoll === "answered") {
+        if (listPoll === "answered") {
             btnAnswered.classList.add("poll-tab--active")
             btnUnanswered.classList.remove("poll-tab--active");
         }
@@ -28,17 +28,17 @@ const ListPollComponent = (props) => {
     return (
         <div className="poll-list">
             <div className="poll-list--tab">
-                    <Button className="poll-list--btn" id="btn-un" value="unanswered" onClick={changeListPoll}>
-                        Unanswered Questions
-                    </Button>
-                    <Button className="poll-list--btn" id="btn-an" value="answered" onClick={changeListPoll}>
-                        Answered Questions
-                    </Button>
+                <Button className="poll-list--btn" id="btn-un" value="unanswered" onClick={changeListPoll}>
+                    Unanswered Questions
+                </Button>
+                <Button className="poll-list--btn" id="btn-an" value="answered" onClick={changeListPoll}>
+                    Answered Questions
+                </Button>
             </div>
             <div className="poll-list--item">
-            {listPoll === "unanswered" ?
-                props?.unansweredList?.map((lid) => (<PollItemComponent key={lid} qid={lid} />)) :
-                props?.answeredList?.map((lid) => (<PollItemComponent key={lid} qid={lid} />))}
+                {listPoll === "unanswered" ?
+                    props?.unansweredList?.map((lid) => (<PollItemComponent key={lid} question_id={lid} />)) :
+                    props?.answeredList?.map((lid) => (<PollItemComponent key={lid} question_id={lid} />))}
             </div>
         </div>
     )

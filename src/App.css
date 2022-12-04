@@ -346,6 +346,7 @@
 .pollAnsResult-question {
   font-size: 15px;
   color: chocolate;
+  word-wrap: break-word;
 }
 
 .pollAnsResult-vote {
@@ -356,6 +357,18 @@
 
 .voted {
   border: 2px solid brown;
+}
+
+.yourVote {
+  background-color: darksalmon;
+  width: 80px;
+  height: 30px;
+  text-align: center;
+  float: right;
+  margin-top: -10px;
+  margin-right: -10px;
+  color: white;
+  font-weight: bold;
 }
 
 /* new poll css */
