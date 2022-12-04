@@ -9,6 +9,7 @@ import LeaderBoardComponent from "./LeaderBoardComponent";
 import PollComponent from "./PollComponent";
 import LoginComponent from "./LoginComponent";
 import NavComponent from "./NavComponent"
+import Page404Component from './Page404Component';
 
 
 class App extends React.Component {
@@ -31,6 +32,7 @@ class App extends React.Component {
             <Route exact path="/add" element={<NewPollComponent />} />
             <Route exact path="/leaderboard" element={<LeaderBoardComponent />} />
             <Route exact path="/questions/:question_id" element={<PollComponent />} />
+            <Route component={Page404Component} />
           </Routes>
         )} 
         
